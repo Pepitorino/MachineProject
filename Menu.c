@@ -1,27 +1,7 @@
-/*
-Description: This program handles orders.
-Programmed by: Ambrosio, Carlos Felipe Q. S11A
-Last modified: 
-Version: 0.01
-[Acknowledgements: <list of sites or borrowed libraries and sources>]
-*/  
-
 #include <stdio.h>
 
-/* <Description of function>
-Precondition: <precondition /
-assumption>
-@param <name> <purpose>
-@return <description of returned result>
-*/
-
-
-/*Runs at the start, created to streamline menu creation.
-Precondition: No precondition.
-@return void
-*/
-void menu(){
-        printf("Mains:");
+int main () {
+    printf("Mains:");
     printf("\n-----------------------------------------");
     printf("\n|ID|Type\t\t|Price\t\t|");
     printf("\n-----------------------------------------");
@@ -59,27 +39,4 @@ void menu(){
     printf("\n-----------------------------------------");
     printf("\n|4 |\tFruit Jucie    \t|55.000\t\t| ");
     printf("\n-----------------------------------------\n");
-}
-
-int total(){
-    printf("\nOrder num: ");
-    printf("\n\tMain:\t<food>\t<price>");
-    printf("\n\tSide:\t<food>\t<price>");
-    printf("\n\tDrink:\t<food>\t<price>");
-    if(discount==1) printf("\nMeal Set of the day Discount ");
-    printf("\nSubtotal:\t\t%d")
-}
-
-int main (){
-    int orders, i;
-    int meal1, meal2, meal3;
-    int main1, main2, main3;
-    int side1, side2, side3;
-    int drink1, drink2, drink3;
-    char option;
-    printf("Hello! I am a program made to handle your order. \n");
-    printf("Here's our menu!\n");
-    menu();
-    printf("How many meals would you like to order? ");
-    scanf("%d \n", &orders);
 }
