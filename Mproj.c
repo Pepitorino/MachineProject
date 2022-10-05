@@ -61,13 +61,27 @@ void menu(){
     printf("\n-----------------------------------------\n");
 }
 
+int order(int *orders, int* main, int* side, int* drink, char option) {
+    printf("\nOrder#%d", (4-*orders));
+    printf("\nMain: ");
+    scanf("%i", *main);
+    printf("\nSide: ");
+    scanf("%i", *side);
+    printf("\nDrink: ");
+    scanf("%i", *drink);\
+    printf("\nIs this order correct (Y/N)?");
+    scanf("%c", &option);
+    if (option=='N') orders++;
+}
+
 int total(){
+    int discount=0;
     printf("\nOrder num: ");
     printf("\n\tMain:\t<food>\t<price>");
     printf("\n\tSide:\t<food>\t<price>");
     printf("\n\tDrink:\t<food>\t<price>");
     if(discount==1) printf("\nMeal Set of the day Discount ");
-    printf("\nSubtotal:\t\t%d")
+    printf("\nSubtotal:\t\t");
 }
 
 int main (){
@@ -80,6 +94,28 @@ int main (){
     printf("Hello! I am a program made to handle your order. \n");
     printf("Here's our menu!\n");
     menu();
+    while (order>3||order<0) {
     printf("How many meals would you like to order? ");
-    scanf("%d \n", &orders);
+    scanf("%d", &orders);
+    if (order>3) {
+        printf("\nSorry you can only order 3 or less meals!");
+    }
+    else if (order<0) {
+        printf("\nSorry you can't order a negative amount of meals!");
+    }
+    }
+    while (orders!=0){
+        if (order==3) {
+            order(orders, &main1, &side1, &drink1, option);
+        }
+        else if (order==2) {
+            order(orders, &main2, &side2, &drink2, option);
+        }
+        else if (order==1) {
+            order(orders, &main3, &side3, &drink3, option);
+        }
+        else; 
+        orders--;
+    }
+    
 }
