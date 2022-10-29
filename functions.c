@@ -160,7 +160,7 @@ float drinkcost(int drink){
 
         case 4:
         return 55;
-        
+
         default:
         return 0;
     }
@@ -192,5 +192,5 @@ void order(int *main, int *side, int *drink, int ordernum){
 }
 
 void total(){
-
+    int num=5;
 }
