@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /*Runs at the start, created to streamline menu creation.
 Precondition: No precondition.
 @return void
@@ -45,54 +43,115 @@ void menu(){
     printf("\n-----------------------------------------\n");
 }
 
-char* mainnum(int main){
+char* maintype(int main){
     switch (main) {
         case 0:
         return "None";
+
         case 1:
         return "Chicken";
+
         case 2:
         return "Pork";
+
         case 3:
         return "Fish";
+
         case 4:
         return "Beef";
+
         default:
         return "Invalid order, main set to none";
     }
 }
 
-char* sidenum(int side){
+char* sidetype(int side){
     switch (side) {
         case 0:
         return "None";
+
         case 1:
         return "Steamed Rice";
+
         case 2:
         return "Shredded Corn";
+
         case 3:
         return "Mashed Potato";
+
         case 4:
         return "Steam Vegetables";
+        
         default:
         return "Invalid order, side set to none";
     }
 }
 
-char* drinknum(int drink){
+char* drinktype(int drink){
     switch (drink) {
         case 0:
         return "None";
+        
         case 1:
         return "Mineral Water";
+        
         case 2:
         return "Iced Tea";
+        
         case 3:
         return "Soda";
+        
         case 4:
         return "Fruit Juice";
+
         default:
         return "Invalid order, drink set to none";
+    }
+}
+
+int maincost(int main){
+    switch (main){
+        case 0:
+        return 0;
+
+        case 1:
+        
+        case 2:
+        
+        case 3:
+        
+        case 4:
+    }
+}
+
+int sidecost(int side){
+    switch (side){
+        case 0:
+        return 0;
+        
+        case 1:
+        
+        case 2:
+        
+        case 3:
+
+        case 4:
+    }
+}
+
+int drinkcost(int drink){
+    switch (drink){
+        case 0:
+        return 0;
+
+
+        case 1:
+        
+        case 2:
+        
+        case 3:
+        
+        case 4:
     }
 }
 
@@ -103,17 +162,17 @@ void order(int *main, int *side, int *drink, int ordernum){
 
         printf("\n\tMain: ");
         scanf("%d", main);
-        printf("\t\t%s\n", mainnum(*main));
+        printf("\t\t%s\n", maintype(*main));
         if (*main>4||*main<0) *main=0;
 
         printf("\n\tSide: ");
         scanf("%d", side);
-        printf("\t\t%s\n", sidenum(*side));
+        printf("\t\t%s\n", sidetype(*side));
         if (*side>4||*side<0) *side=0;
 
         printf("\n\tDrink: ");
         scanf("%d", drink);
-        printf("\t\t%s\n", drinknum(*drink));
+        printf("\t\t%s\n", drinktype(*drink));
         if (*drink>4||*drink<0) *drink=0;
 
         printf("Is this order correct(Y/N)? ");
@@ -123,41 +182,4 @@ void order(int *main, int *side, int *drink, int ordernum){
 
 void total(){
 
-}
-
-int main (){
-    int orders, ordernum=1;
-    int main1, main2, main3;
-    int side1, side2, side3;
-    int drink1, drink2, drink3;
-    char answer;
-
-    printf("Hello! I am a program made to take your order.\n");
-
-    do {
-        printf("\nHow many meals would you like to order? (maximum 3)? ");
-        scanf("%i", &orders);
-        if (orders>3){
-            printf("I'm sorry, you can only order 1 to 3 meals\n");
-        }
-        else if (orders<0){
-            printf("I'm sorry you can't order a negative amount of meals.\n");
-        }
-    } while (orders>3||orders<0);
-
-    while (orders!=0){
-        if (orders==3){
-            order(&main3, &side3, &drink3, ordernum);
-            ordernum++;
-        }
-        else if (orders==2){
-            order(&main2, &side2, &drink2, ordernum);
-            ordernum++;
-        }
-        else if (orders==1){
-            order(&main1, &side1, &drink1, ordernum);
-            ordernum++;
-        }
-        orders--;
-    }
 }
