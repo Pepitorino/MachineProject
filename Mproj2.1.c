@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <functions.c>
 
 int main (){
     int orders, ordernum=1, i;

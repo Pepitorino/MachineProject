@@ -109,49 +109,60 @@ char* drinktype(int drink){
     }
 }
 
-int maincost(int main){
+float maincost(int main){
     switch (main){
-        case 0:
-        return 0;
-
         case 1:
-        
+        return 90;
+
         case 2:
-        
+        return 105;
+
         case 3:
-        
+        return 120;
+
         case 4:
+        return 135;
+
+        default:
+        return 0;
     }
 }
 
-int sidecost(int side){
-    switch (side){
-        case 0:
-        return 0;
-        
+float sidecost(int side){
+    switch (side){        
         case 1:
-        
+        return 20;
+
         case 2:
-        
+        return 35;
+
         case 3:
+        return 50;
 
         case 4:
+        return 65;
+
+        default:
+        return 0;
     }
 }
 
-int drinkcost(int drink){
+float drinkcost(int drink){
     switch (drink){
-        case 0:
-        return 0;
-
-
         case 1:
-        
+        return 25;
+
         case 2:
-        
+        return 35; 
+
         case 3:
-        
+        return 45;
+
         case 4:
+        return 55;
+        
+        default:
+        return 0;
     }
 }
 
