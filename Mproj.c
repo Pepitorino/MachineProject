@@ -61,17 +61,24 @@ void menu(){
     printf("\n-----------------------------------------\n");
 }
 
-int order(int *orders, int* main, int* side, int* drink, char option) {
-    printf("\nOrder#%d", (4-*orders));
+return order(int* orders, int* main, int* side, int* drink) {
+    char option;
+    int m, s, d;
+    printf("\nOrder#%d", (*orders));
     printf("\nMain: ");
-    scanf("%i", *main);
+    scanf("%i", &m);
     printf("\nSide: ");
-    scanf("%i", *side);
+    scanf("%i", &s);
     printf("\nDrink: ");
-    scanf("%i", *drink);\
+    scanf("%i", &d);
     printf("\nIs this order correct (Y/N)?");
-    scanf("%c", &option);
-    if (option=='N') orders++;
+    scanf(" %c", &option);
+    *main = m;
+    *side = s;
+    *drink = d;
+    if (option=='Y') {
+        *orders+=1;
+    }
 }
 
 int total(){
@@ -85,37 +92,41 @@ int total(){
 }
 
 int main (){
-    int orders, i;
-    int meal1, meal2, meal3;
+    int orders=0, i;
     int main1, main2, main3;
     int side1, side2, side3;
     int drink1, drink2, drink3;
+    int* ptr_main1=&main1, ptr_main2=&main2, ptr_main3=&main3;
+    int* ptr_side1=&side1, ptr_side2=&side2, ptr_side3=&side3;
+    int* ptr_drink1=&drink1, ptr_drink2=&drink2, ptr_drink3=&drink3;
+    int* ptr_orders=&order;
     char option;
     printf("Hello! I am a program made to handle your order. \n");
     printf("Here's our menu!\n");
     menu();
-    while (order>3||order<0) {
-    printf("How many meals would you like to order? ");
-    scanf("%d", &orders);
-    if (order>3) {
-        printf("\nSorry you can only order 3 or less meals!");
-    }
-    else if (order<0) {
-        printf("\nSorry you can't order a negative amount of meals!");
-    }
+    while (orders>3||orders<1) {
+        printf("How many meals would you like to order? ");
+        scanf("%d", &orders);
+        if (orders>3) {
+        printf("\nSorry you can only order 3 or less meals!\n");
+        }
+        else if (orders<0) {
+        printf("\nSorry you can't order a negative amount of meals!\n");
+        }
     }
     while (orders!=0){
-        if (order==3) {
-            order(orders, &main1, &side1, &drink1, option);
+        if (orders==3) {
+            order(ptr_orders, ptr_main1, ptr_side1, ptr_drink1);
         }
-        else if (order==2) {
-            order(orders, &main2, &side2, &drink2, option);
+        else if (orders==2) {
+            order(ptr_orders, ptr_main2, ptr_side2, ptr_drink2);
         }
-        else if (order==1) {
-            order(orders, &main3, &side3, &drink3, option);
+        else if (orders==1) {
+            order(ptr_orders, ptr_main3, ptr_side3, ptr_drink3);
         }
         else; 
         orders--;
     }
-    
+    total();
+    printf("&d, %d, %d", main1, side1, drink1);
 }
