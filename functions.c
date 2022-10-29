@@ -167,8 +167,9 @@ float drinkcost(int drink){
 }
 
 void order(int *main, int *side, int *drink, int ordernum){
-    char correct;
+    char correct='\0';
     do {
+        correct='\0';
         printf("\nOrder %d:", ordernum);
 
         printf("\n\tMain: ");
@@ -186,11 +187,24 @@ void order(int *main, int *side, int *drink, int ordernum){
         printf("\t\t%s\n", drinktype(*drink));
         if (*drink>4||*drink<0) *drink=0;
 
-        printf("Is this order correct(Y/N)? ");
-        scanf(" %c", &correct);
-    } while (correct!='Y');
+        while (correct!='y'&&correct!='Y'&&correct!='n'&&correct!='N'){
+            printf("\nIs this order correct(Y/N)? ");
+            scanf(" %c", &correct);
+            if (correct!='y'&&correct!='Y'&&correct!='n'&&correct!='N') printf("Invalid option");
+        }
+
+    } while (correct!='Y'&&correct!='y');
 }
 
-void total(){
-    int num=5;
+float subtotal(int main, int side, int drink){
+    return maincost(main)+sidecost(side)+drinkcost(drink);
 }
+
+void displaysubtotal(int main, int side, int drink, int ordernum){
+    printf("\nOrder %d:\n", ordernum);
+    printf("\tMain:\t%s\t%.2f\n", maintype(main), maincost(main));
+    printf("\tSide:\t%s\t%.2f\n", sidetype(side), sidecost(side));
+    printf("\tDrink:\t%s\t%.2f\n", drinktype(drink), drinkcost(drink));
+    printf("Subtotal:\t\t\t%.2f\n", subtotal(main, side, drink));
+}
+

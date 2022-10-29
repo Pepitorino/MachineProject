@@ -1,12 +1,13 @@
 #include <stdio.h>
-#include <functions.c>
+#include "functions.c"
 
 int main (){
     int orders, ordernum=1, i;
-    int main[3];
-    int side[3];
-    int drink[3];
-    char answer;
+    int main[4];
+    int side[4];
+    int drink[4];
+    char ans;
+    float total;
 
     printf("Hello! I am a program made to take your order.\n");
 
@@ -21,10 +22,45 @@ int main (){
         }
     } while (orders>3||orders<0);
 
-    for(orders; orders!=0; orders--){
-            order(&main[orders], &side[orders], &drink[orders], ordernum);
-            ordernum++;
+    while (ans!='y'&&ans!='Y'&&ans!='n'&&ans!='N'){
+        printf("\nProceed with order(Y/N)? ");
+        scanf(" %c", &ans);
+        if (ans!='y'&&ans!='Y'&&ans!='n'&&ans!='N') printf("Invalid option");
+        if (ans=='N') orders=0;
     }
 
+    for(i=orders; i>0; i--){
+            order(&main[i], &side[i], &drink[i], ordernum);
+            ordernum++;
+
+        if (ans=='y'||ans=='Y') ans='\0';
+    
+        while (ans!='y'&&ans!='Y'&&ans!='n'&&ans!='N'){
+            printf("\nProceed with rest of order(Y/N)? ");
+            scanf(" %c", &ans);
+            if (ans!='y'&&ans!='Y'&&ans!='n'&&ans!='N') printf("Invalid option\n");
+            if (ans=='N') {
+                i=0;
+            }
+     }
+    }
+
+    if (ans=='y'||ans=='Y') ans='\0';
+
+    while (ans!='y'&&ans!='Y'&&ans!='n'&&ans!='N'){
+        printf("\nProceed with order(Y/N)? ");
+        scanf(" %c", &ans);
+        if (ans!='y'&&ans!='Y'&&ans!='n'&&ans!='N') printf("Invalid option\n");
+        if (ans=='N') orders=0;
+    }
+
+    ordernum=1;
+
+    for(i=orders; i!=0; i--){
+        displaysubtotal(main[i], side[i], drink[i], ordernum);
+        ordernum++;
+        total+=subtotal(main[i], side[i], drink[i]);
+    }
+    printf ("\nTotal amount due: %.2f\n", total);
 
 }
