@@ -61,7 +61,7 @@ void menu(){
     printf("\n-----------------------------------------\n");
 }
 
-return order(int* orders, int* main, int* side, int* drink) {
+void order(int* orders, int* main, int* side, int* drink) {
     char option;
     int m, s, d;
     printf("\nOrder#%d", (*orders));
