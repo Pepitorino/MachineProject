@@ -1,9 +1,11 @@
+
 /*Runs at the start, created to streamline menu creation.
 Precondition: No precondition.
 @return void
 */
 void menu(){
-        printf("Mains:");
+    printf("Menu:");
+    printf("\n\nMains:");
     printf("\n-----------------------------------------");
     printf("\n|ID|Type\t\t|Price\t\t|");
     printf("\n-----------------------------------------");
@@ -15,6 +17,8 @@ void menu(){
     printf("\n-----------------------------------------");
     printf("\n|4 |\tBeef    \t|135.00\t\t| ");
     printf("\n-----------------------------------------");
+
+    sleep(1);
 
     printf("\n\nSides:");
     printf("\n-----------------------------------------");
@@ -28,6 +32,8 @@ void menu(){
     printf("\n-----------------------------------------");
     printf("\n|4 |\tSteam Vegetables    \t|65.00\t| ");
     printf("\n-----------------------------------------");
+
+    sleep(1);
 
     printf("\n\nDrink:");
     printf("\n-----------------------------------------");
@@ -196,15 +202,28 @@ void order(int *main, int *side, int *drink, int ordernum){
     } while (correct!='Y'&&correct!='y');
 }
 
-float subtotal(int main, int side, int drink){
-    return maincost(main)+sidecost(side)+drinkcost(drink);
+float subtotal(int main, int side, int drink, int mainday, int sideday, int drinkday){
+    if (main==mainday&&side==sideday&&drink==drinkday) {
+        return (maincost(main)+sidecost(side)+drinkcost(drink))*0.85;
+    }
+    return (maincost(main)+sidecost(side)+drinkcost(drink));
 }
 
-void displaysubtotal(int main, int side, int drink, int ordernum){
+void displaysubtotal(int main, int side, int drink, int ordernum, int mainday, int sideday, int drinkday){
     printf("\nOrder %d:\n", ordernum);
     printf("\tMain:\t%s\t%.2f\n", maintype(main), maincost(main));
     printf("\tSide:\t%s\t%.2f\n", sidetype(side), sidecost(side));
     printf("\tDrink:\t%s\t%.2f\n", drinktype(drink), drinkcost(drink));
-    printf("Subtotal:\t\t\t%.2f\n", subtotal(main, side, drink));
+    if (main==mainday&&side==sideday&&drink==drinkday) printf("Meal of the Day Bonus: -15%%\n");
+    printf("Subtotal:\t\t\t%.2f\n", subtotal(main, side, drink, mainday, sideday, drinkday));
 }
 
+char proceed(char* ans, int orders){
+    while (*ans!='y'&&*ans!='Y'&&*ans!='n'&&*ans!='N'){
+        printf("\nProceed with order(Y/N)? ");
+        scanf(" %c", ans);
+        if (*ans!='y'&&*ans!='Y'&&*ans!='n'&&*ans!='N') printf("Invalid option");
+        if (*ans=='N'||*ans=='n') return 0;
+    }
+    return orders;
+}
