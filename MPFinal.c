@@ -54,8 +54,6 @@ int main ()
             default:
             printf("\nInvalid Option\n");
         }
-
-        system("cls");
     }
 
     return 0;
