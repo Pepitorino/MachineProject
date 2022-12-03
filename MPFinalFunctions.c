@@ -1,9 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 struct Order 
 {
     int main;
     int side;
     int drink;
 };
+
+void flush(){
+    char flush;
+    do {
+        flush=getchar();
+    } while (flush!=EOF&&flush!='\n');
+}
 
 void menu()
 {
@@ -73,7 +84,7 @@ char* mainType(int main)
         return "Beef";
 
         default:
-        return "Invalid order, main set to none";
+        return "Invalid, main set to none";
     }
 }
 
@@ -96,7 +107,7 @@ char* sideType(int side)
         return "Steam Vegetables";
         
         default:
-        return "Invalid order, side set to none";
+        return "Invalid, side set to none";
     }
 }
 
@@ -119,7 +130,7 @@ char* drinkType(int drink)
         return "Fruit Juice";
 
         default:
-        return "Invalid order, drink set to none";
+        return "Invalid, drink set to none";
     }
 }
 
@@ -220,25 +231,27 @@ void displayMealset (struct Order order)
 
 float subtotal (struct Order order, struct Order orderDay)
 {
+    float subtotal = mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
     if (compare(order, orderDay))
-        return 0.15*mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
-    return mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
+        return subtotal-subtotal*0.15;
+    return subtotal;
 }
 
 void order (struct Order* orders, struct Order orderDay, int* ordernum)
 {
-    int i, j;
+    int i;
     char ans;
     do {
         printf("\n\nHow many orders would you like? (Maximum of 3)\t");
         scanf("%d", ordernum);
+        fflush(stdin);
 
         if (*ordernum<0||*ordernum>3) printf("Invalid amount");
 
     } while (*ordernum<0||*ordernum>3);
 
-    for (i=1, j=1; i<=*ordernum; i++){
-        printf("\nOrder %d:", j);
+    for (i=1; i<=*ordernum; i++){
+        printf("\nOrder %d:", i);
 
         do {
             printf("\nChoose an option:");
@@ -246,7 +259,10 @@ void order (struct Order* orders, struct Order orderDay, int* ordernum)
             printf("\n\t2. Mealset of the Day");
             printf("\n\t3. Randomize Mealset\nOption: ");
             scanf(" %c", &ans);
-        } while (ans>'3'&&ans<'1');
+            fflush(stdin);
+            
+            if (ans>'3'||ans<'1') printf("\nInvalid option.\n");
+        } while (ans>'3'||ans<'1');
 
         switch (ans){
             case '3':
@@ -260,20 +276,23 @@ void order (struct Order* orders, struct Order orderDay, int* ordernum)
             case '1':
                 printf("\n\tMain:\t");
                 scanf(" %d", &orders[i].main);
-                if (orders[i].main>4||orders[i].main<0) orders[i].main=0;
+                fflush(stdin);
                 printf("\t\t%s", mainType(orders[i].main));
+                if (orders[i].main>4||orders[i].main<0) orders[i].main=0;
                 printf("\t%.2f", mainCost(orders[i].main));
 
                 printf("\n\tSide:\t");
                 scanf(" %d", &orders[i].side);
-                if (orders[i].side>4||orders[i].side<0) orders[i].main=0;
+                fflush(stdin);
                 printf("\t\t%s", sideType(orders[i].side));
+                if (orders[i].side>4||orders[i].side<0) orders[i].side=0;
                 printf("\t%.2f", sideCost(orders[i].side));
 
                 printf("\n\tDrink:\t");
                 scanf(" %d", &orders[i].drink);
-                if (orders[i].drink>4||orders[i].drink<0) orders[i].main=0;
+                fflush(stdin);
                 printf("\t\t%s", drinkType(orders[i].drink));
+                if (orders[i].drink>4||orders[i].drink<0) orders[i].drink=0;
                 printf("\t%.2f", drinkCost(orders[i].drink));
                 break;
         }
@@ -292,8 +311,10 @@ void order (struct Order* orders, struct Order orderDay, int* ordernum)
             if (ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n') printf("\nInvalid Option.");
         } while (ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n');
 
-        if (ans=='n'||ans=='N') i--;
-        j++;
+        if (ans=='n'||ans=='N'){
+            i--;
+        }
+
     }
     
 }

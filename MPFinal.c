@@ -10,6 +10,7 @@ int main ()
     Order orders[3];
     Order orderDay;
     int answer, ordernum;
+    int i; 
 
     srand(time(NULL));
     randomize(&orderDay);
@@ -27,6 +28,7 @@ int main ()
         printf("\n\nSelect what you would like to do: ");
 
         scanf(" %d", &answer);
+        fflush(stdin);
 
         switch (answer){
             case 1:
@@ -34,7 +36,12 @@ int main ()
             break;
 
             case 2:
-            // show mealset and total
+            for (i=1;i<=ordernum;i++){
+                printf("Order #%d:", i);
+                displayMealset(orders[i]);
+                printf("\n");
+                sleep(1);
+            }
             break;
 
             case 3:
