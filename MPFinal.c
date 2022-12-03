@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "TypeCosting.c"
 #include "MPFinalFunctions.c"
 
 typedef struct Order Order;
@@ -10,15 +9,16 @@ int main ()
 {
     Order orders[3];
     Order orderDay;
-    int answer, ordernum;
+    int ordernum=1;
     int i; 
+    char answer;
 
     srand(time(NULL));
     randomize(&orderDay);
     
     printf("Welcome!");
 
-    while (answer!=5)
+    while (answer!='5')
     {
         printf("\n\n1. New Order");
         printf("\n2. View Previous Order Receipt");
@@ -28,36 +28,36 @@ int main ()
 
         printf("\n\nSelect what you would like to do: ");
 
-        scanf(" %d", &answer);
+        scanf(" %c", &answer);
         fflush(stdin);
 
         switch (answer){
-            case 1:
+            case '1':
             order(orders, orderDay, &ordernum);
             break;
 
-            case 2:
+            case '2':
             for (i=1;i<=ordernum;i++){
                 printf("Order #%d:", i);
                 displayMealset(orders[i]);
-                printf("\n");
+                printf("\n\n");
                 sleep(1);
             }
             receipt(orders, orderDay, &ordernum);
             break;
 
-            case 3:
+            case '3':
             menu();
             break;
 
-            case 4:
+            case '4':
             printf("\nMealset of the Day:\n");
             displayMealset(orderDay);
             printf("\n\nDiscount: 15%%");
             sleep(3);
             break;
 
-            case 5:
+            case '5':
             printf("\nHave a nice day!");
             break;
 

@@ -125,8 +125,33 @@ void order (struct Order* orders, struct Order orderDay, int* ordernum)
         } while (ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n');
 
         if (ans=='n'||ans=='N'){
-            i--;
+            do {
+                printf("\nWould you like to\n1. Restart Order\n2. Cancel\nOption: ");
+                scanf(" %c", &ans);
+                fflush(stdin);
+
+                if (ans=='1'){
+                    i--;
+                }
+                else if (ans=='2'){
+                    do {
+                        printf("\nWould you like to\n1. Cancel this order\n2. Cancel all orders\nOption: ");
+                        scanf(" %c", &ans);
+                        if (ans=='1'){
+                            i--;
+                        }
+                        else if(ans=='2'){
+                            *ordernum=0;
+                        }
+                        else printf("Invalid option.");
+                    } while (ans!='1'&&ans!='2');
+                }
+                else printf("\nInvalid option.\n");
+
+            } while(ans!='1'&&ans!='2');
         }
+
+        //cancel order then go into which type of cancel
     }
 
     receipt(orders, orderDay, ordernum);
@@ -148,8 +173,6 @@ void displayMealset (struct Order order)
     
     return;
 }
-
-
 
 float receipt(struct Order* orders, struct Order orderDay, int *ordernum)
 {
