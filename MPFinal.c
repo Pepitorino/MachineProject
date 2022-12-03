@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "TypeCosting.c"
 #include "MPFinalFunctions.c"
 
 typedef struct Order Order;
@@ -42,6 +43,7 @@ int main ()
                 printf("\n");
                 sleep(1);
             }
+            receipt(orders, orderDay, &ordernum);
             break;
 
             case 3:
