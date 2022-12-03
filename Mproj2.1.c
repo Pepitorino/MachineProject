@@ -6,7 +6,7 @@
 int main (){
 
     srand(time(NULL));
-    int mainday=(rand()%4), sideday=(rand()%4), drinkday=(rand()%4);
+    int mainday=(rand()%4+1), sideday=(rand()%4+1), drinkday=(rand()%4+1);
     int orders, ordernum=1, i;
     int main[4]={0};
     int side[4]={0};
