@@ -3,10 +3,10 @@ struct Order
     int main;
     int side;
     int drink;
+};
 
-}; 
-
-void menu(){
+void menu()
+{
     printf("Menu:");
     printf("\n\nMains:");
     printf("\n-----------------------------------------");
@@ -54,7 +54,8 @@ void menu(){
     sleep(2);
 }
 
-char* mainType(int main){
+char* mainType(int main)
+{
     switch (main) {
         case 0:
         return "None";
@@ -76,7 +77,8 @@ char* mainType(int main){
     }
 }
 
-char* sideType(int side){
+char* sideType(int side)
+{
     switch (side) {
         case 0:
         return "None";
@@ -98,7 +100,8 @@ char* sideType(int side){
     }
 }
 
-char* drinkType(int drink){
+char* drinkType(int drink)
+{
     switch (drink) {
         case 0:
         return "None";
@@ -120,7 +123,8 @@ char* drinkType(int drink){
     }
 }
 
-float mainCost(int main){
+float mainCost(int main)
+{
     switch (main){
         case 1:
         return 90;
@@ -139,7 +143,8 @@ float mainCost(int main){
     }
 }
 
-float sideCost(int side){
+float sideCost(int side)
+{
     switch (side){        
         case 1:
         return 20;
@@ -158,7 +163,8 @@ float sideCost(int side){
     }
 }
 
-float drinkCost(int drink){
+float drinkCost(int drink)
+{
     switch (drink){
         case 1:
         return 25;
@@ -177,13 +183,28 @@ float drinkCost(int drink){
     }
 }
 
-void randomize (struct Order *order){
+void randomize (struct Order *order)
+{
     order->main=rand()%4+1;
     order->drink=rand()%4+1;
     order->side=rand()%4+1;
 }
 
-void displayMealset(struct Order order){
+int compare (struct Order order1, struct Order order2)
+{
+    if (order1.main!=order2.main) return 0;
+    if (order1.side!=order2.side) return 0;
+    if (order1.drink!=order2.drink) return 0;
+    return 1; 
+}
+
+void displayMealset (struct Order order);
+float subtotal (struct Order order, struct Order orderDay);
+void order (struct Order* orders, struct Order orderDay, int* ordernum);
+// void total (struct Order orders, struct Order orderDay, int* ordernum)
+
+void displayMealset (struct Order order)
+{
     printf("\nMain: %d", order.main);
     printf("\n\t%s", mainType(order.main));
     printf("\t%.2f", mainCost(order.main));
@@ -197,71 +218,88 @@ void displayMealset(struct Order order){
     return;
 }
 
-int compare (struct Order order1, struct Order order2){
-    if (order1.main!=order2.main) return 0;
-    if (order1.side!=order2.side) return 0;
-    if (order1.drink!=order2.drink) return 0;
-    return 1; 
-}
-
-float subtotal(struct Order order, struct Order orderDay){
+float subtotal (struct Order order, struct Order orderDay)
+{
     if (compare(order, orderDay))
-        return mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
-    return 0.15*mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
+        return 0.15*mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
+    return mainCost(order.main)+sideCost(order.side)+drinkCost(order.drink);
 }
 
-void order(struct Order* orders, struct Order orderDay, int* ordernum){
-    int i, j, ans;
+void order (struct Order* orders, struct Order orderDay, int* ordernum)
+{
+    int i, j;
+    char ans;
     do {
         printf("\n\nHow many orders would you like? (Maximum of 3)\t");
         scanf("%d", ordernum);
 
-        if (*ordernum<0||*ordernum>3){
-            printf("Invalid amount");
-        }
+        if (*ordernum<0||*ordernum>3) printf("Invalid amount");
+
     } while (*ordernum<0||*ordernum>3);
 
-    for (i=1, j=1; i<=*ordernum; i++, j++){
+    for (i=1, j=1; i<=*ordernum; i++){
         printf("\nOrder %d:", j);
 
-        printf("\nChoose an option:");
-        printf("\n\t1. Choose Mealset");
-        printf("\n\t2. Mealset of the Day");
-        printf("\n\t3. Randomize Mealset");
-        scanf("\n\t%d", &ans);
-        
+        do {
+            printf("\nChoose an option:");
+            printf("\n\n\t1. Choose Mealset");
+            printf("\n\t2. Mealset of the Day");
+            printf("\n\t3. Randomize Mealset\nOption: ");
+            scanf(" %c", &ans);
+        } while (ans>'3'&&ans<'1');
+
         switch (ans){
-            case 3:
+            case '3':
                 randomize(&orders[i]);
                 displayMealset(orders[i]);
                 break;
-            case 2:
+            case '2':
                 orders[i]=orderDay;
                 displayMealset(orders[i]);
                 break;
-            case 1:
+            case '1':
                 printf("\n\tMain:\t");
                 scanf(" %d", &orders[i].main);
-                if (orders[i].main!=0||orders[i].main!=1||orders[i].main!=2||orders[i].main!=3||orders[i].main!=4) orders[i].main=0;
+                if (orders[i].main>4||orders[i].main<0) orders[i].main=0;
                 printf("\t\t%s", mainType(orders[i].main));
+                printf("\t%.2f", mainCost(orders[i].main));
 
                 printf("\n\tSide:\t");
                 scanf(" %d", &orders[i].side);
-                if (orders[i].side!=0||orders[i].side!=1||orders[i].side!=2||orders[i].side!=3||orders[i].side!=4) orders[i].side=0;
+                if (orders[i].side>4||orders[i].side<0) orders[i].main=0;
                 printf("\t\t%s", sideType(orders[i].side));
+                printf("\t%.2f", sideCost(orders[i].side));
 
                 printf("\n\tDrink:\t");
                 scanf(" %d", &orders[i].drink);
-                if (orders[i].drink!=0||orders[i].drink!=1||orders[i].drink!=2||orders[i].drink!=3||orders[i].drink!=4) orders[i].drink=0;
+                if (orders[i].drink>4||orders[i].drink<0) orders[i].main=0;
                 printf("\t\t%s", drinkType(orders[i].drink));
+                printf("\t%.2f", drinkCost(orders[i].drink));
                 break;
         }
 
         if (compare(orders[i], orderDay)){
             printf("\n\n\tMealset of the Day Bonus: -15%%");
         }
-    }
 
+        printf("\n\nSubtotal: %.2f", subtotal(orders[i], orderDay));
+
+        do {
+            printf("\n\nIs this order correct? (Y/N)");
+            printf("\nOption: ");
+            scanf(" %c", &ans);
+
+            if (ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n') printf("\nInvalid Option.");
+        } while (ans!='Y'&&ans!='y'&&ans!='N'&&ans!='n');
+
+        if (ans=='n'||ans=='N') i--;
+        j++;
+    }
+    
 }
 
+/*void total(struct Order orders, struct Order orderDay, int* ordernum)
+{
+
+}*/
 

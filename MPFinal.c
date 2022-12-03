@@ -42,6 +42,7 @@ int main ()
             break;
 
             case 4:
+            printf("\nMealset of the Day:\n");
             displayMealset(orderDay);
             printf("\n\nDiscount: 15%%");
             sleep(3);
