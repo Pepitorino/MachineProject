@@ -1,6 +1,11 @@
 #include <stdio.h>
 
-void menu()
+/*Prints menu for user.
+Precondition: No precondition
+@return void
+*/
+void 
+menu()
 {
     printf("Menu:");
     printf("\n\nMains:");
@@ -49,7 +54,13 @@ void menu()
     sleep(2);
 }
 
-char* mainType(int main)
+/*This function returns type of main given the id.
+Precondition: No precondition.
+@param main is the id of the main.
+@return type of main as a string literal.
+*/
+char* 
+mainType(int main)
 {
     switch (main) {
         case 0:
@@ -72,7 +83,13 @@ char* mainType(int main)
     }
 }
 
-char* sideType(int side)
+/*This function returns type of side given the id.
+Precondition: No precondition.
+@param side is the id of the side
+@return type of side as a string literal
+*/
+char* 
+sideType(int side)
 {
     switch (side) {
         case 0:
@@ -95,7 +112,13 @@ char* sideType(int side)
     }
 }
 
-char* drinkType(int drink)
+/*This function returns type of drink given the id.
+Precondition: No precondition.
+@param drink is the id of the drink
+@return type of drink as a string literal
+*/
+char* 
+drinkType(int drink)
 {
     switch (drink) {
         case 0:
@@ -118,7 +141,14 @@ char* drinkType(int drink)
     }
 }
 
-float mainCost(int main)
+
+/*This function returns the cost of main given the id.
+Precondition: No precondition
+@param main is the id of the main
+@return cost of main
+*/
+float 
+mainCost(int main)
 {
     switch (main){
         case 1:
@@ -138,7 +168,13 @@ float mainCost(int main)
     }
 }
 
-float sideCost(int side)
+/*This function returns the cost of side given the id.
+Precondition: No precondition
+@param side is the id of the side
+@return cost of side
+*/
+float 
+sideCost(int side)
 {
     switch (side){        
         case 1:
@@ -158,7 +194,13 @@ float sideCost(int side)
     }
 }
 
-float drinkCost(int drink)
+/*This function returns the cost of drink given the id.
+Precondition: No precondition
+@param drink is the id of the drink
+@return cost of drink
+*/
+float 
+drinkCost(int drink)
 {
     switch (drink){
         case 1:
