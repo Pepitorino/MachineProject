@@ -72,7 +72,7 @@ displayMealset (struct Order order)
 /*These functions are separated as they are dependent on one or more other functions.*/
 void order (struct Order* orders, struct Order orderDay, int* ordernum);
 float subtotal (struct Order order, struct Order orderday);
-float receipt (struct Order* orders, struct Order orderDay, int* ordernum);
+void receipt (struct Order* orders, struct Order orderDay, int* ordernum);
 
 /*Function used to take orders.
 Precondition: No precondition
@@ -287,7 +287,5 @@ receipt(struct Order* orders, struct Order orderDay, int *ordernum)
         total += subtotal(orders[i], orderDay);
     }
     printf("\n\nTotal amount: P%.2f", total);
-
-    return total;
 }
 
