@@ -1,8 +1,29 @@
+/********************************************************************
+*******
+This is to certify that this project is my own work, based on my personal efforts in
+studying and applying the concepts learned. I have constructed the functions and
+their respective algorithms and corresponding code by myself. The program was
+run, tested, and debugged by my own efforts. I further certify that I have not copied
+in part or whole or otherwise plagiarized the work of other students and/or persons.
+Ambrosio, Carlos Felipe Q., DLSU ID#
+12275964
+********************************************************************
+*******/
+
+/*
+Description:      Ordering System to Handle Orders
+Programmed by:    Ambrosio, Carlos Felipe Q. - S11A
+Last modified:    December 4, 2022
+Version:          5.0
+[Acknowledgements: Tim Bailey's An Introduction to the C Programming Language and Software Design, StackOverflow]
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "MPFinalFunctions.c"
 
+// typedefs the struct Order to make code more concise and cleaner
 typedef struct Order Order;
 
 int main () 
@@ -18,6 +39,7 @@ int main ()
     
     printf("Welcome!");
 
+    // Main Menu
     while (answer!='5')
     {
         printf("\n\n1. New Order");
