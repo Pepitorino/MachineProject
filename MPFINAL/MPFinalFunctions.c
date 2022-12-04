@@ -229,13 +229,16 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
         }
     }
 
+    //Displays receipt
     total=receipt(orders, orderDay, ordernum);
+
+    //Calculates change
     do { 
         printf("\n\nEnter amount of cash given: P");
         scanf(" %f", &change);
         if (change<total) printf("Invalid Amount.");
+        fflush(stdin);
     } while (change<total);
-    fflush(stdin);
 
     change-=total;
     printf("\nChange: P%.2f", change);
