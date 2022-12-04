@@ -51,7 +51,7 @@ menu()
 }
 
 /*This function returns type of main given the id.
-Precondition: No precondition.
+Precondition: Id is an integer from 0-4.
 @param main is the id of the main.
 @return type of main as a string literal.
 */
@@ -80,7 +80,7 @@ mainType(int main)
 }
 
 /*This function returns type of side given the id.
-Precondition: No precondition.
+Precondition: Id is an integer from 0-4.
 @param side is the id of the side
 @return type of side as a string literal
 */
@@ -109,7 +109,7 @@ sideType(int side)
 }
 
 /*This function returns type of drink given the id.
-Precondition: No precondition.
+Precondition: Id is an integer from 0-4.
 @param drink is the id of the drink
 @return type of drink as a string literal
 */
@@ -139,7 +139,7 @@ drinkType(int drink)
 
 
 /*This function returns the cost of main given the id.
-Precondition: No precondition
+Precondition: Id is an integer from 0-4
 @param main is the id of the main
 @return cost of main
 */
@@ -165,7 +165,7 @@ mainCost(int main)
 }
 
 /*This function returns the cost of side given the id.
-Precondition: No precondition
+Precondition: Id is an integer from 0-4
 @param side is the id of the side
 @return cost of side
 */
@@ -191,7 +191,7 @@ sideCost(int side)
 }
 
 /*This function returns the cost of drink given the id.
-Precondition: No precondition
+Precondition: Id is an integer from 0-4
 @param drink is the id of the drink
 @return cost of drink
 */
