@@ -211,6 +211,7 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
                         /*If user would like to cancel all orders, ordernum is put to 0, 
                         this stops the other functions and options from displaying or calculating anything*/
                         else if(ans=='2'){
+                            printf("\nCancelling all orders.\n");
                             *ordernum=0;
                         }
                         
@@ -233,15 +234,17 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
     total=receipt(orders, orderDay, ordernum);
 
     //Calculates change
-    do { 
-        printf("\n\nEnter amount of cash given: P");
-        scanf(" %f", &change);
-        if (change<total) printf("Invalid Amount.");
-        fflush(stdin);
-    } while (change<total);
+    if (ans!='2'){
+        do { 
+            printf("\n\nEnter amount of cash given: P");
+            scanf(" %f", &change);
+            if (change<total) printf("Invalid Amount.");
+            fflush(stdin);
+        } while (change<total);
 
-    change-=total;
-    printf("\nChange: P%.2f", change);
+        change-=total;
+        printf("\nChange: P%.2f", change);
+    }
 
 }
 
