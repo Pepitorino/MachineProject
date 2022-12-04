@@ -203,7 +203,7 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
                         the ids for the main side and drink in that order are set to 0
                         and the system proceeds to the next order*/
                         if (ans=='1'){
-                            printf("\nOrder #%d cancelled", i);
+                            printf("\nOrder #%d cancelled\n", i);
                             orders[i].main=0;
                             orders[i].side=0;
                             orders[i].drink=0;
@@ -229,12 +229,30 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
             } while(ans<'1'&&ans>'3'); 
         }
     }
+ 
+    // Asks user if they want to proceed to checkout or cancel all orders
+    if (*ordernum>0){
+	    do {
+	        printf("\nWould you like to\n1. Proceed to checkout?\n2. Cancel all orders\nOption: ");
+	        scanf(" %c", &ans);
+	        fflush(stdin);
+	        
+	        if (ans!='1'&&ans!='2') printf("\nInvalid option.\n");
+	
+	    } while (ans!='1'&&ans!='2');
+	}
+
+    // Sets ordernum to zero to stop all displays and computations.
+    if (ans=='2'){
+        printf("\nCancelling all orders.");
+        *ordernum=0;
+    }
 
     //Displays receipt
     total=receipt(orders, orderDay, ordernum);
 
-    //Calculates change
-    if (ans!='2'){
+    //Calculates change if user has not cancelled
+    if (ans!='2'&&*ordernum>0){
         do { 
             printf("\n\nEnter amount of cash given: P");
             scanf(" %f", &change);
