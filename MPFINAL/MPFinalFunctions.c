@@ -72,7 +72,7 @@ displayMealset (struct Order order)
 /*These functions are separated as they are dependent on one or more other functions.*/
 void order (struct Order* orders, struct Order orderDay, int* ordernum);
 float subtotal (struct Order order, struct Order orderday);
-void receipt (struct Order* orders, struct Order orderDay, int* ordernum);
+float receipt (struct Order* orders, struct Order orderDay, int* ordernum);
 
 /*Function used to take orders.
 Precondition: No precondition
@@ -85,8 +85,8 @@ void
 order (struct Order* orders, struct Order orderDay, int* ordernum)
 {
     int i;
-    float total;
     char ans;
+    float total, change;
 
     // Asks user how many orders they would like to order
     do {
@@ -200,30 +200,13 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
                         fflush(stdin);
 
                         /* If user would like to cancel just that order, 
-                        they are asked if they would like to proceed 
-                        to the next order or restart current order*/
+                        the ids for the main side and drink in that order are set to 0
+                        and the system proceeds to the next order*/
                         if (ans=='1'){
-                            if (i<*ordernum) {
-                                do {
-                                printf("\nWould you like to\n1. Restart Order.\n2. Proceed to next order\nOption: ");
-                                scanf(" %c", &ans);
-                                fflush(stdin);
-                                } while (ans!='1'&&ans!='2');
-
-                                // If user would like to restart the order, i is decremented in order to keep it at the same order.
-                                if (ans=='1'){
-                                    i--;
-                                }
-                                
-                                // If user would like to proceed to next order, all items in the cancelled order are set to 0(none).
-                                else if (ans=='2'){
-                                    printf("\nOrder #%d cancelled", i);
-                                    orders[i].main=0;
-                                    orders[i].side=0;
-                                    orders[i].drink=0;
-                                }
-                                
-                            }
+                            printf("\nOrder #%d cancelled", i);
+                            orders[i].main=0;
+                            orders[i].side=0;
+                            orders[i].drink=0;
                         }
                         /*If user would like to cancel all orders, ordernum is put to 0, 
                         this stops the other functions and options from displaying or calculating anything*/
@@ -235,7 +218,7 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
                         This makes it so that it proceeds straight to the receipt*/
                         else if (ans=='3'){
                             printf("\nProceeding to checkout.\n");
-                            *ordernum=i;
+                            *ordernum=i-1;
                         }
                         else printf("Invalid option.\n");
                     } while (ans<'1'&&ans>'3');
@@ -246,7 +229,17 @@ order (struct Order* orders, struct Order orderDay, int* ordernum)
         }
     }
 
-    receipt(orders, orderDay, ordernum);
+    total=receipt(orders, orderDay, ordernum);
+    do { 
+        printf("\n\nEnter amount of cash given: P");
+        scanf(" %f", &change);
+        if (change<total) printf("Invalid Amount.");
+    } while (change<total);
+    fflush(stdin);
+
+    change-=total;
+    printf("\nChange: P%.2f", change);
+
 }
 
 /*This function calculates the subtotal given the order.
@@ -269,9 +262,9 @@ subtotal (struct Order order, struct Order orderDay)
 @param orderDay is the mealset of the day is an element from @param orders matches this, it displays it to the user
 @param ordernum is a pointer to the variable storing the number of orders, dereferenced for the function to
         know how many times to loop the printing.
-@return void
+@return total of all orders
 */
-void 
+float
 receipt(struct Order* orders, struct Order orderDay, int *ordernum)
 {
     int i;
@@ -287,5 +280,7 @@ receipt(struct Order* orders, struct Order orderDay, int *ordernum)
         total += subtotal(orders[i], orderDay);
     }
     printf("\n\nTotal amount: P%.2f", total);
+
+    return total;
 }
 

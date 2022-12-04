@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /*Prints menu for user.
 Precondition: No precondition
@@ -21,8 +22,6 @@ menu()
     printf("\n|4 |\tBeef    \t|135.00\t\t| ");
     printf("\n-----------------------------------------");
 
-    sleep(2);
-
     printf("\n\nSides:");
     printf("\n-----------------------------------------");
     printf("\n|ID|Type\t\t|Price\t\t|");
@@ -35,8 +34,6 @@ menu()
     printf("\n-----------------------------------------");
     printf("\n|4 |\tSteam Vegetables    \t|65.00\t| ");
     printf("\n-----------------------------------------");
-
-    sleep(2);
 
     printf("\n\nDrink:");
     printf("\n-----------------------------------------");
@@ -51,7 +48,6 @@ menu()
     printf("\n|4 |\tFruit Juice    \t|55.000\t\t| ");
     printf("\n-----------------------------------------\n");
 
-    sleep(2);
 }
 
 /*This function returns type of main given the id.

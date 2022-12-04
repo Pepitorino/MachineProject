@@ -30,8 +30,7 @@ int main ()
 {
     Order orders[3];
     Order orderDay;
-    int ordernum=1;
-    int i; 
+    int ordernum=0; // Assigned zero, so that if an invalid input is given when asked for number of orders, it defaults to none
     char answer;
 
     srand(time(NULL));
@@ -59,12 +58,6 @@ int main ()
             break;
 
             case '2':
-            for (i=1;i<=ordernum;i++){
-                printf("Order #%d:", i);
-                displayMealset(orders[i]);
-                printf("\n\n");
-                sleep(1);
-            }
             receipt(orders, orderDay, &ordernum);
             break;
 
@@ -76,7 +69,6 @@ int main ()
             printf("\nMealset of the Day:\n");
             displayMealset(orderDay);
             printf("\n\nDiscount: 15%%");
-            sleep(3);
             break;
 
             case '5':
